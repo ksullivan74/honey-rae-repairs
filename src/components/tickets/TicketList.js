@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import {Link, useNavigate } from "react-router-dom"
 import { TicketForm } from "./TicketForm"
 import "./Tickets.css"
 
@@ -89,9 +89,9 @@ export const TicketList = ({searchTermState}) => {
                     <button onClick={() => { setEmergency(false) }}>Show All</button>
                 </>
                 :<> 
-                <button onClick={() => navigate("/ticket/create")}>Create Ticket</button>
-                <button onClick={() => updateOpenOnly(true)}>Open Ticket</button>
-                <button onClick={() => updateOpenOnly(false)}>All My Tickets</button>
+                    <button onClick={() => navigate("/ticket/create")}>Create Ticket</button>
+                    <button onClick={() => updateOpenOnly(true)}>Open Ticket</button>
+                    <button onClick={() => updateOpenOnly(false)}>All My Tickets</button>
                 </>
         }
 
@@ -102,6 +102,9 @@ export const TicketList = ({searchTermState}) => {
                 filteredTickets.map(
                     (ticket) => {
                         return <section className="ticket">
+                            <header>
+                            <Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
+                            </header>
                             <header>{ticket.description}</header>
                             <footer>Emergency: {ticket.emergency ? "Yes!!!!!" : "No"}</footer>
                         </section>
